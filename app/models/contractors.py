@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlalchemy.orm import Mapped, mapped_column
-from models import db
+from app.models import db
 
 
 class Contractor(db.Model):

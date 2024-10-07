@@ -7,4 +7,4 @@ class Base(DeclarativeBase):
 
 
 db = SQLAlchemy(model_class=Base)
-from models.contractors import Contractor
+from app.models.contractors import Contractor
