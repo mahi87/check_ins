@@ -3,19 +3,16 @@ from app import app, db
 from app.models import Contractor
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def home_page():
     contractors_list = Contractor.query.all()
     return render_template("home_page.html", contractors_list=contractors_list)
 
 
-@app.route("/contractors", methods=["POST", "GET"])
-def contractor_details():
-    return render_template("contractor_details.html")
-
-
-@app.route("/contractor", methods=["POST"])
+@app.route("/contractor", methods=["POST", "GET"])
 def contractor():
+    if request.method == "GET":
+        return render_template("contractor_details.html")
     name = request.form["name"]
     occupation = request.form["occupation"]
     salary = request.form["salary"]
@@ -28,9 +25,9 @@ def contractor():
     return redirect("/")
 
 
-@app.route("/contractor/<contractor_id>", methods=["POST", "GET"])
-def remove_contractor(contractor_id):
-    contractor = Contractor.query.filter_by(id=contractor_id).all()
+@app.route("/contractor/<contractor_id>", methods=["POST"])
+def delete_contractor(contractor_id):
+    contractor = Contractor.query.get(contractor_id)
     db.session.delete(contractor)
     db.session.commit()
     return redirect("/")

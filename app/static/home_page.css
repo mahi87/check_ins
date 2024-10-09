@@ -7,3 +7,9 @@
 #contractor-header{
   margin-bottom: 20px;
 }
+
+#icon_button{
+  --bs-btn-padding-y: .2rem; 
+  --bs-btn-padding-x: .1rem; 
+  --bs-btn-font-size: .90rem;
+}
