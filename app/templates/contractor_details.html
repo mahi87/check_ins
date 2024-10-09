@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="align-items-center my-2" id="contractor-header">
+  <h3 class="my-3">Add Contractor</h3>
+  <form action="{{ url_for('add_contractor')}}" method="post">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" name="name" />
+    </div>
+    <div class="mb-3">
+      <label for="occupation" class="form-label">Occupation</label>
+      <input
+        type="text"
+        class="form-control"
+        id="occupation"
+        name="occupation"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="salary" class="form-label">Salary</label>
+      <input type="int" class="form-control" id="salary" name="salary" />
+    </div>
+    <div class="mb-3">
+      <label for="payout-on" class="form-label">Payout On</label>
+      <input type="text" class="form-control" id="payout-on" name="payout_on" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+{% endblock %}
