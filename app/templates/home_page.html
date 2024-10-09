@@ -23,7 +23,7 @@
         <small class="mb-1">salary: {{contractor.salary}}/month</small>
         <div class="d-flex">
           <form action="#" method="POST">
-            <button type="submit" class="btn text-success" id="icon_button">
+            <button type="button" class="btn text-success" id="icon_button">
               <i class="bi bi-pencil-square"></i>
             </button>
           </form>
@@ -31,9 +31,36 @@
             action="{{url_for('delete_contractor',contractor_id=contractor.id)}}"
             method="post"
           >
-            <button type="submit" class="btn text-danger" id="icon_button">
+            <button
+              type="button"
+              class="btn text-danger"
+              id="icon_button"
+              data-bs-toggle="modal"
+              data-bs-target="#{{contractor.id}}"
+            >
               <i class="bi bi-trash3-fill"></i>
             </button>
+            <div class="modal fade" id="{{contractor.id}}">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    Are you sure want to delete {{contractor.name}}
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-success"
+                      data-bs-dismiss="modal"
+                    >
+                      No
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                      Yes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </form>
         </div>
       </div>
