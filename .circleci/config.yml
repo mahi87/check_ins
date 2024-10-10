@@ -1,0 +1,13 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2024.10
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: |
+          docker login -u mahi87mnit@gmail.com -p ${DIGITALOCEAN_TOKEN} registry.digitalocean.com
+          docker build -t registry.digitalocean.com/roadmap-ai-container-registry/checkins:latest .
+          docker push registry.digitalocean.com/roadmap-ai-container-registry/checkins:latest
