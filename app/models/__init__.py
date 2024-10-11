@@ -8,3 +8,4 @@ class Base(DeclarativeBase):
 
 db = SQLAlchemy(model_class=Base)
 from .contractors import Contractor
+from .user import User
