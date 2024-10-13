@@ -9,7 +9,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/home", methods=["GET"])
 @login_required
 def home_page():
-    contractors_list = Contractor.query.all()
+    contractors_list = Contractor.query.filter_by(user_id=current_user.id)
     return render_template("home_page.html", contractors_list=contractors_list)
 
 
@@ -18,12 +18,12 @@ def home_page():
 def contractor():
     if request.method == "GET":
         return render_template("contractor_details.html")
-    name = request.form["name"]
-    occupation = request.form["occupation"]
-    salary = request.form["salary"]
-    payout_on = request.form["payout_on"]
     contractor = Contractor(
-        name=name, occupation=occupation, salary=salary, payout_at=payout_on
+        user_id=current_user.id,
+        name=request.form["name"],
+        occupation=request.form["occupation"],
+        salary=request.form["salary"],
+        payout_at=request.form["payout_on"],
     )
     db.session.add(contractor)
     db.session.commit()
@@ -33,7 +33,9 @@ def contractor():
 @app.route("/contractor/<contractor_id>", methods=["POST"])
 @login_required
 def delete_contractor(contractor_id):
-    contractor = Contractor.query.get(contractor_id)
+    contractor = Contractor.query.filter_by(
+        id=contractor_id, user_id=current_user.id
+    ).first_or_404()
     db.session.delete(contractor)
     db.session.commit()
     return redirect(url_for("home_page"))
